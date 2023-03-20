@@ -1,11 +1,21 @@
+require_relative 'app'
 require_relative 'utils'
 
-def list_books
-    p 'hello'
+def get_option_selected(from, to)
+  option = ''
+  loop do
+    print "Select a valid option [#{from} ... #{to}]:?"
+    option = gets.chomp.to_i
+    break if option >= from && option <= to
+  end
+
+  option
 end
 
-puts 'Please select an option:'
-OPTIONS.each { |key, value| puts "#{key} - #{value[0]}" }
+def main
+  app = App.new
+  app.run
+  puts 'Thanks for using this app!'
+end
 
-selected_option = gets.chomp.to_i
-send((OPTIONS[selected_option][1]).to_s)
+main
