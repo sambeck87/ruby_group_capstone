@@ -4,10 +4,10 @@ require_relative './classes/game'
 require_relative './classes/preserve'
 
 class App
-  #def initialize
-    @games = []
-    @authors = []
-  #end
+  # def initialize
+  @games = []
+  @authors = []
+  # end
 
   def list_books; end
 
