@@ -4,7 +4,8 @@ def save_author(author)
   authors = author.map do |a|
     [
       a.first_name,
-      a.last_name
+      a.last_name,
+      a.id
     ]
   end
   authors_json = JSON.generate(authors)

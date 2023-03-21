@@ -4,6 +4,7 @@ require_relative './classes/game'
 require_relative './classes/preserve'
 require_relative 'classes/genre'
 require_relative 'classes/music_album'
+require_relative './utils'
 
 class App
   def initialize
@@ -11,11 +12,6 @@ class App
     @genres = []
     seed_data
   end
-
-  # def initialize
-  @games = []
-  @authors = []
-  # end
 
   def list_books; end
 
@@ -40,20 +36,9 @@ class App
 
   def list_labels; end
 
-  def self.list_author
-    File.write('./data/authors.json', '') unless File.exist?('./data/authors.json')
-    author_data = File.read('./data/authors.json')
-
-    if author_data.strip.empty?
-      @authors = []
-      puts 'Not authors found'
-    elsif @authors.empty?
-      author_data = JSON.parse(author_data)
-      author_data.each do |author|
-        @authors.push(Author.new(author[0], author[1]))
-      end
-      @authors.each { |author| puts "Name: #{author.first_name}, Lastname: #{author.last_name}" }
-    end
+  def list_authors
+    recover_author
+    Author.all.each { |author| puts "Name: #{author.first_name}, Lastname: #{author.last_name}" }
   end
 
   def add_book; end
@@ -72,7 +57,7 @@ class App
     puts "\nAlbum created successfully.\n\n"
   end
 
-  def self.add_game
+  def add_game
     print 'Is the game multiplayer? (Y/N): '
     multiplayer = gets.chomp.to_s.downcase == 'y'
     print 'Last played at (YYYY-MM-DD): '
@@ -91,11 +76,8 @@ class App
     new_game = Game.new(nil, author, nil, publish_date, last_played)
     new_game.move_to_archive
     new_game.multiplayer = multiplayer
-    @games << new_game
-    @authors << author
-    # @genres << genre
-    # @labels << label
-    save_author(@authors)
+    p new_game
+    save_author(Author.all)
     puts 'The Game has been created successfully ✅'
   end
 
