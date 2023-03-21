@@ -126,6 +126,3 @@ class App
     end
   end
 end
-
-App.list_author
-App.add_game
