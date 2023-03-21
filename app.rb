@@ -28,12 +28,13 @@ class App
   def list_games
     Game.all.each do |game|
       puts "
+      \n
     Genre: #{game.genre}
     Author: #{game.author.first_name} #{game.author.last_name}
     Label title: #{game.label}
     Publish_date: #{game.publish_date}
     Last_played: #{game.last_played_at}
-    Multiplayer: #{game.multiplayer}"
+    Multiplayer: #{game.multiplayer} \n"
     end
   end
 
@@ -47,7 +48,7 @@ class App
   def list_labels; end
 
   def list_authors
-    Author.all.each { |author| puts "Name: #{author.first_name}, Lastname: #{author.last_name}" }
+    Author.all.each { |author| puts "\nName: #{author.first_name}, Lastname: #{author.last_name} \n" }
   end
 
   def add_book; end
@@ -70,8 +71,8 @@ class App
     new_game = Game.new(nil, data[3], nil, data[2], data[1])
     new_game.move_to_archive
     new_game.multiplayer = data[0]
-    save_author(Author.all)
-    save_game(Game.all)
+    # save_author(Author.all)
+    # save_game(Game.all)
     puts 'The Game has been created successfully ✅'
   end
 
@@ -79,11 +80,13 @@ class App
     if Author.all.empty?
       user_data_game << Author.new(first_name, last_name)
     else
-      #author = Author.all.find { |aut| aut.first_name == first_name && aut.last_name == last_name }
-      Author.all.each do |author|
-        found = author.first_name == first_name && author.last_name == last_name
-        user_data_game << (found ? author : Author.new(first_name, last_name))
-      end
+      author = Author.all.find { |aut| aut.first_name == first_name && aut.last_name == last_name }
+      user_data_game << author unless author.nil?
+      user_data_game << Author.new(first_name, last_name) if author.nil?
+      # Author.all.each do |author|
+      #   found = author.first_name == first_name && author.last_name == last_name
+      #   user_data_game << (found ? author : Author.new(first_name, last_name))
+      # end
     end
   end
 
@@ -124,8 +127,7 @@ class App
   end
 
   def run
-    recover_author
-    recover_games
+    load_data
     loop do
       puts 'Please select an option:'
       OPTIONS.each { |key, value| puts "#{key} - #{value[0]}" }
@@ -134,5 +136,6 @@ class App
 
       break if option == 10
     end
+    preserve_data
   end
 end
