@@ -56,7 +56,7 @@ class App
     last_name = gets.chomp.to_s
     author = Author.new(first_name, last_name)
     new_game = Game.new(genre = nil, author, label = nil, publish_date, multiplayer, last_played)
-    archived = new_game.move_to_archive
+    new_game.move_to_archive
     @games << new_game
     @authors << author
     # @genres << genre
