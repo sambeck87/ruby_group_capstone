@@ -1,3 +1,8 @@
+require 'json'
+require_relative './classes/author'
+require_relative './classes/game'
+require_relative './classes/preserve'
+
 OPTIONS = {
   1 => ['List all books', 'list_books'],
   2 => ['List all music albums', 'list_albums'],
@@ -10,3 +15,50 @@ OPTIONS = {
   9 => ['Add a game', 'add_game'],
   10 => %w[Exit exit]
 }.freeze
+
+def load_data
+  recover_author
+  recover_games
+end
+
+def preserve_data
+  save_author(Author.all)
+  save_game(Game.all)
+end
+
+def recover_author
+  File.write('./data/authors.json', '') unless File.exist?('./data/authors.json')
+  author_data = File.read('./data/authors.json')
+
+  if author_data.strip.empty?
+    puts 'Not authors found'
+  elsif Author.all.empty?
+    author_data = JSON.parse(author_data)
+    author_data.each do |author|
+      Author.new(author[0], author[1], author[2])
+    end
+  end
+end
+
+def recover_objects_by_id(id)
+  Author.all.find { |aut| aut.id == id }
+end
+
+def recover_games
+  File.write('./data/games.json', '') unless File.exist?('./data/games.json')
+  games_data = File.read('./data/games.json')
+
+  if games_data.strip.empty?
+    puts 'Not games found'
+  elsif Game.all.empty?
+    games_data = JSON.parse(games_data)
+    games_data.each do |game|
+      # genre = recover_objects_by_id(game[0])
+      author = recover_objects_by_id(game[0]) # cambiar al index correcto al implementar todo
+      # label = recover_objects_by_id(game[2])
+      new_game = Game.new(nil, author, nil, game[1], game[2]) # cambiar al index correcto al implementar todo
+      new_game.move_to_archive
+      new_game.multiplayer = game[3]
+    end
+  end
+end
