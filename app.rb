@@ -25,7 +25,17 @@ class App
     puts @music_albums.length.positive? ? list : 'There isn\'t any album.'
   end
 
-  def list_games; end
+  def list_games
+    Game.all.each do |game|
+      puts "
+    Genre: #{game.genre}
+    Author: #{game.author.first_name} #{game.author.last_name}
+    Label title: #{game.label}
+    Publish_date: #{game.publish_date}
+    Last_played: #{game.last_played_at}
+    Multiplayer: #{game.multiplayer}"
+    end
+  end
 
   def list_genres
     list = ''
@@ -37,7 +47,6 @@ class App
   def list_labels; end
 
   def list_authors
-    recover_author
     Author.all.each { |author| puts "Name: #{author.first_name}, Lastname: #{author.last_name}" }
   end
 
@@ -57,13 +66,35 @@ class App
     puts "\nAlbum created successfully.\n\n"
   end
 
+  def created_game(data)
+    new_game = Game.new(nil, data[3], nil, data[2], data[1])
+    new_game.move_to_archive
+    new_game.multiplayer = data[0]
+    save_author(Author.all)
+    save_game(Game.all)
+    puts 'The Game has been created successfully ✅'
+  end
+
+  def create_author(first_name, last_name, user_data_game)
+    if Author.all.empty?
+      user_data_game << Author.new(first_name, last_name)
+    else
+      #author = Author.all.find { |aut| aut.first_name == first_name && aut.last_name == last_name }
+      Author.all.each do |author|
+        found = author.first_name == first_name && author.last_name == last_name
+        user_data_game << (found ? author : Author.new(first_name, last_name))
+      end
+    end
+  end
+
   def add_game
+    user_data_game = []
     print 'Is the game multiplayer? (Y/N): '
-    multiplayer = gets.chomp.to_s.downcase == 'y'
+    user_data_game << (gets.chomp.to_s.downcase == 'y')
     print 'Last played at (YYYY-MM-DD): '
-    last_played = gets.chomp.to_s
+    user_data_game << gets.chomp.to_s
     print 'Publish date (YYYY-MM-DD): '
-    publish_date = gets.chomp.to_s
+    user_data_game << gets.chomp.to_s
     print 'Genre: '
     # genre = Genre.new(gets.chomp.to_s)
     print 'Label: '
@@ -72,13 +103,8 @@ class App
     first_name = gets.chomp.to_s
     print 'Author Last Name: '
     last_name = gets.chomp.to_s
-    author = Author.new(first_name, last_name)
-    new_game = Game.new(nil, author, nil, publish_date, last_played)
-    new_game.move_to_archive
-    new_game.multiplayer = multiplayer
-    p new_game
-    save_author(Author.all)
-    puts 'The Game has been created successfully ✅'
+    create_author(first_name, last_name, user_data_game)
+    created_game(user_data_game)
   end
 
   def exit; end
@@ -98,6 +124,8 @@ class App
   end
 
   def run
+    recover_author
+    recover_games
     loop do
       puts 'Please select an option:'
       OPTIONS.each { |key, value| puts "#{key} - #{value[0]}" }

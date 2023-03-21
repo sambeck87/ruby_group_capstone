@@ -1,5 +1,6 @@
 require 'json'
 require_relative './classes/author'
+require_relative './classes/game'
 
 OPTIONS = {
   1 => ['List all books', 'list_books'],
@@ -23,15 +24,28 @@ def recover_author
   elsif Author.all.empty?
     author_data = JSON.parse(author_data)
     author_data.each do |author|
-      p author
       Author.new(author[0], author[1], author[2])
     end
   end
 end
 
-recover_author
-p Author.all
+def recover_objects_by_id(id)
+  # Author.all.each do |author|
+  #   author if author.id == id
+  # end
+
+  author = Author.all.find { |aut| aut.id == id }
 =begin
+  Genre.all.each do |author|
+    author if genre.id == id
+  end
+  Label.all.each do |author|
+    author if label.id == id
+  end
+=end
+end
+
+
 def recover_games
   File.write('./data/games.json', '') unless File.exist?('./data/games.json')
   games_data = File.read('./data/games.json')
@@ -41,8 +55,13 @@ def recover_games
   elsif Game.all.empty?
     games_data = JSON.parse(games_data)
     games_data.each do |game|
-      Game.new(author[0], author[1])
+      #genre = recover_objects_by_id(game[0])
+      author = recover_objects_by_id(game[0]) # cambiar al index correcto al implementar todo
+      #label = recover_objects_by_id(game[2])
+      new_game = Game.new(nil, author, nil, game[1], game[2]) # cambiar al index correcto al implementar todo
+      new_game.move_to_archive
+      new_game.multiplayer = game[3]
+      author = []
     end
   end
 end
-=end
