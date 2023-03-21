@@ -24,5 +24,3 @@ class Item
   end
 end
 
-date = Item.new(nil, nil, nil, nil, '2010-10-09')
-p date.can_be_archived?
