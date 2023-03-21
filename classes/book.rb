@@ -4,7 +4,11 @@ class Book < Item
   def initialize(genre, author, label, publish_date, publisher)
     super(genre, author, label, publish_date)
     @publisher = publisher
-    @cover_state = ''
+    @cover_state = 'bad'
+  end
+
+  def can_be_archived?
+    super || @cover_state == 'bad'
   end
 
   def self.all
