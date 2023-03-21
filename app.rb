@@ -12,18 +12,21 @@ class App
 
   def list_albums
     list = ''
-    @music_albums.each_with_index { |album, i| list << "\nIndex: #{i} Genre: #{album.genre}, Author: #{album.author}, Label: #{album.label} Publish Date: #{album.publish_date}"}
+    @music_albums.each_with_index do |album, i|
+      list << "\nIndex: #{i} Genre: #{album.genre}, Author: #{album.author}, "
+      list << "Label: #{album.label} Publish Date: #{album.publish_date}"
+    end
     list << "\n\n"
-    puts @music_albums.length > 0 ? list : 'There isn\'t any album.'
+    puts @music_albums.length.positive? ? list : 'There isn\'t any album.'
   end
 
   def list_games; end
 
   def list_genres
     list = ''
-    @genres.each_with_index { |genre, i| list << "\nIndex: #{i} Name: #{genre.name}"}
+    @genres.each_with_index { |genre, i| list << "\nIndex: #{i} Name: #{genre.name}" }
     list << "\n\n"
-    puts @genres.length > 0 ? list : 'There isn\'t any genres.'
+    puts @genres.length.positive? ? list : 'There isn\'t any genres.'
   end
 
   def list_labels; end

@@ -23,4 +23,3 @@ class Item
     (Date.today - @publish_date).to_f / 365 > 10
   end
 end
-
