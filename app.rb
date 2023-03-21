@@ -55,8 +55,9 @@ class App
     print 'Author Last Name: '
     last_name = gets.chomp.to_s
     author = Author.new(first_name, last_name)
-    new_game = Game.new(genre = nil, author, label = nil, publish_date, multiplayer, last_played)
+    new_game = Game.new(nil, author, nil, publish_date, last_played)
     new_game.move_to_archive
+    new_game.multiplayer = multiplayer
     @games << new_game
     @authors << author
     # @genres << genre
