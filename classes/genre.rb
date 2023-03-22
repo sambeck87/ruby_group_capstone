@@ -20,8 +20,8 @@ class Genre
   end
 
   def self.create_genre(name)
-    genre_obj = self.all.find { |genre| genre.name == name }
-    genre_obj = self.new(name) if genre_obj.nil?
+    genre_obj = all.find { |genre| genre.name == name }
+    new(name) if genre_obj.nil?
   end
 
   def self.all
@@ -29,14 +29,14 @@ class Genre
   end
 
   def self.by_id(id)
-    self.all.find { |genre| genre.id == id }
+    all.find { |genre| genre.id == id }
   end
 
   def self.from_hash(genre)
-    self.new(genre['name'], genre['id'])
+    new(genre['name'], genre['id'])
   end
 
   def self.from_hash_array(array)
-    array.each { |genre| self.from_hash(genre) }
+    array.each { |genre| from_hash(genre) }
   end
 end
