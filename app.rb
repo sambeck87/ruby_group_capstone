@@ -58,10 +58,10 @@ class App
   end
 
   def save_book_in_json(book)
-    books_data = File.read('books.json')
+    books_data = File.read('./data/books.json')
     @books = JSON.parse(books_data)
     @books << book
-    File.write('books.json', JSON.pretty_generate(@books))
+    File.write('./data/books.json', JSON.pretty_generate(@books))
   end
 
   def add_book
@@ -80,10 +80,9 @@ class App
     print 'enter publisher: '
     publisher = gets.chomp
 
-    genre_object = Genre.all.find { |item| item.name == genre } || Genre.new(genre)
-    label_object = Label.all.find { |item| item.title == title } || Label.new(title, color)
-    author_object = Author.all.find { |item| item.first_name + item.last_name == first_name + last_name } ||
-                    Author.new(author_first_name, author_last_name)
+    genre_object = Genre.create_genre(genre)
+    label_object = Label.create_label(title, color)
+    author_object = Author.create_author(author_first_name, author_last_name)
 
     new_book = Book.new(genre_object, author_object, label_object, publish_date, publisher)
     save_book_in_json(new_book)
