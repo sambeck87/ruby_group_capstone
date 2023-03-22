@@ -57,13 +57,6 @@ class App
     puts "\n\n"
   end
 
-  def save_book_in_json(book)
-    books_data = File.read('./data/books.json')
-    @books = JSON.parse(books_data)
-    @books << book
-    File.write('./data/books.json', JSON.pretty_generate(@books))
-  end
-
   def add_book
     print 'enter genre: '
     genre = gets.chomp
@@ -84,8 +77,7 @@ class App
     label_object = Label.create_label(title, color)
     author_object = Author.create_author(author_first_name, author_last_name)
 
-    new_book = Book.new(genre_object, author_object, label_object, publish_date, publisher)
-    save_book_in_json(new_book)
+    Book.new(genre_object, author_object, label_object, publish_date, publisher)
   end
 
   def add_album
