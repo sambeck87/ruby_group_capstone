@@ -16,7 +16,7 @@ class MusicAlbum < Item
     {
       genre_id: @genre.id,
       author_id: @author.id,
-      label: @label,
+      label_id: @label.id,
       publish_date: @publish_date,
       on_spotify: @on_spotify
     }.to_json
@@ -29,7 +29,8 @@ class MusicAlbum < Item
   def self.from_hash(album)
     genre_obj = Genre.by_id(album['genre_id'])
     author_obj = Author.by_id(album['author_id'])
-    new(genre_obj, author_obj, album['label'], album['publish_date'], on_spotify: album['on_spotify'])
+    label_obj = Label.by_id(album['label_id'])
+    new(genre_obj, author_obj, label_obj, album['publish_date'], on_spotify: album['on_spotify'])
   end
 
   def self.from_hash_array(array)
