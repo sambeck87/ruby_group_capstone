@@ -29,7 +29,7 @@ describe Game do
       #expect(game.move_to_archive).to be true
     end
 
-    it 'Create an Item correctly' do
+    it 'The name of the author should be Sergey' do
       genre1 = double('genre1')
       author1 = double('author1')
       allow(author1).to receive(:first_name).and_return('Sergey')
