@@ -70,17 +70,13 @@ end
 def load_genres
   return unless File.exist?('data/genres.json') && File.size?('data/genres.json')
 
-  JSON.parse(File.read('data/genres.json')).each { |genre| Genre.new(genre['name'], genre['id']) }
+  Genre.from_hash_array(JSON.parse(File.read('data/genres.json')))
 end
 
 def load_albums
   return unless File.exist?('data/albums.json') && File.size?('data/albums.json')
 
-  JSON.parse(File.read('data/albums.json')).each do |album|
-    genre_obj = Genre.all.find { |genre| genre.id == album['genre_id'] }
-    author_obj = Author.all.find { |author| author.id == album['author_id'] }
-    MusicAlbum.new(genre_obj, author_obj, album['label'], album['publish_date'], on_spotify: album['on_spotify'])
-  end
+  MusicAlbum.from_hash_array(JSON.parse(File.read('data/albums.json')))
 end
 
 def save_genres
@@ -98,14 +94,12 @@ def album_from_user_input
   author_firstname = gets.chomp
   print 'Input album author last name: '
   author_lastname = gets.chomp
-  author = Author.all.find { |aut| aut.first_name == author_firstname && aut.last_name == author_lastname }
-  author = Author.new(author_firstname, author_lastname) if author.nil?
+  author = Author.create_author(author_firstname, author_lastname) if author.nil?
   print 'Input album label: '
   label = gets.chomp
   print 'Input album genre: '
   genre_name = gets.chomp
-  genre = Genre.all.find { |gen| gen.name == genre_name }
-  genre = Genre.new(genre_name) if genre.nil?
+  genre = Genre.create_genre(genre_name)
   print 'Input publish date: '
   publish_date = gets.chomp
   MusicAlbum.new(genre, author, label, publish_date)
