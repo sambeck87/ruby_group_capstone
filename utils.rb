@@ -74,17 +74,13 @@ end
 def load_genres
   return unless File.exist?('data/genres.json') && File.size?('data/genres.json')
 
-  JSON.parse(File.read('data/genres.json')).each { |genre| Genre.new(genre['name'], genre['id']) }
+  Genre.from_hash_array(JSON.parse(File.read('data/genres.json')))
 end
 
 def load_albums
   return unless File.exist?('data/albums.json') && File.size?('data/albums.json')
 
-  JSON.parse(File.read('data/albums.json')).each do |album|
-    genre_obj = Genre.all.find { |genre| genre.id == album['genre_id'] }
-    author_obj = Author.all.find { |author| author.id == album['author_id'] }
-    MusicAlbum.new(genre_obj, author_obj, album['label'], album['publish_date'], on_spotify: album['on_spotify'])
-  end
+  MusicAlbum.from_hash_array(JSON.parse(File.read('data/albums.json')))
 end
 
 def save_genres
