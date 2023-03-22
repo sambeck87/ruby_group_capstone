@@ -2,7 +2,7 @@ require 'rspec'
 require_relative '../classes/item'
 
 describe Item do
-  context 'When testing Item class' do
+  context 'When testing Item class genre' do
     it 'Genre name should be Rock' do
       genre0 = double('genre0')
       allow(genre0).to receive(:name).and_return('Rock')
@@ -15,7 +15,9 @@ describe Item do
 
       expect(genre0_name).to eq('Rock')
     end
+  end
 
+  context 'When testing Item class label' do
     it 'Label color should be White' do
       genre1 = double('genre1')
       author1 = double('author1')
@@ -29,8 +31,10 @@ describe Item do
 
       expect(label_color).to eq('White')
     end
+  end
 
-    it 'Create an Item correctly' do
+  context 'When testing Item class author' do
+    it 'Authors name should be Michael' do
       genre2 = double('genre2')
       author2 = double('author2')
       allow(author2).to receive(:first_name).and_return('Michael')
@@ -43,8 +47,10 @@ describe Item do
 
       expect(author_name).to eq('Michael')
     end
+  end
 
-    it 'Create an Item correctly' do
+  context 'When testing Item class move_to_archive' do
+    it 'The result should be true' do
       genre3 = double('genre3')
       author3 = double('author3')
       label3 = double('label3')

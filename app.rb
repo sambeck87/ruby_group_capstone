@@ -31,6 +31,7 @@ class App
 
   def list_games
     Game.all.each_with_index do |game, index|
+      puts "\n********************************** GAMES **********************************\n"
       puts "
     #{index} - Genre: #{game.genre.name}
     Author: #{game.author.first_name} #{game.author.last_name}

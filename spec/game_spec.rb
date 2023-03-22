@@ -1,35 +1,8 @@
 require 'rspec'
-require_relative '../app'
+require_relative '../classes/game'
 
 describe Game do
-  context 'When testing Game class' do
-=begin
-    it 'Create an Item correctly' do
-      genre0 = double('genre0')
-      allow(genre0).to receive(:name).and_return('Thriller')
-      author0 = double('author0')
-      allow(author0).to receive(:first_name).and_return('Sergey')
-      allow(author0).to receive(:last_name).and_return('Ivanov')
-      label0 = double('label0')
-      allow(label0).to receive(:title).and_return('S.T.A.L.K.E.R.: Shadow of Chernobyl')
-      allow(label0).to receive(:color).and_return('Black')
-      publish_date = '2007-03-20'
-      multiplayer = false
-      last_played_at = '2020-01-19'
-
-      app = App.new
-      app.created_game([true, last_played_at, publish_date, genre0, label0, author0])
-      publish_date_object = Game.all[0].publish_date.strftime
-      # genre_name = Game.all[0].genre.name
-      label_title = Game.all[0].label.title
-      # author_name = Game.all[0].author.first_name
-
-      expect(publish_date_object).to eq('2007-03-20')
-      expect(label_title).to eq('S.T.A.L.K.E.R.: Shadow of Chernobyl')
-      # expect(author_name).to eq('Sergey')
-      # expect(game.move_to_archive).to be true
-    end
-=end
+  context 'When testing Game class author' do
     it 'The name of the author should be Sergey' do
       genre1 = double('genre1')
       author1 = double('author1')
@@ -37,16 +10,16 @@ describe Game do
       allow(author1).to receive(:last_name).and_return('Ivanov')
       label1 = double('label1')
       publish_date = '2007-03-20'
-      multiplayer = false
       last_played_at = '2020-01-19'
 
-      app = App.new
-      app.created_game([true, last_played_at, publish_date, genre1, label1, author1])
-      author_name = Game.all[0].author.first_name
+      game1 = Game.new(genre1, author1, label1, publish_date, last_played_at)
+      author_name = game1.author.first_name
 
       expect(author_name).to eq('Sergey')
     end
+  end
 
+  context 'When testing Game class move_to archive' do
     it 'Archive should be true' do
       genre2 = double('genre2')
       author2 = double('author2')
@@ -54,11 +27,27 @@ describe Game do
       publish_date = '2007-03-20'
       last_played_at = '2020-01-19'
 
-      app = App.new
-      app.created_game([true, last_played_at, publish_date, genre2, label2, author2])
-      archive = Game.all[1].move_to_archive
+      game2 = Game.new(genre2, author2, label2, publish_date, last_played_at)
+      archive = game2.move_to_archive
 
       expect(archive).to be true
+    end
+  end
+
+  context 'When testing Game class label' do
+    it 'The name of the game should be "Shadow of Chernobyl"' do
+      genre3 = double('genre3')
+      author3 = double('author3')
+      label3 = double('label3')
+      allow(label3).to receive(:title).and_return('Shadow of Chernobyl')
+      allow(label3).to receive(:color).and_return('Black')
+      publish_date = '2017-03-20'
+      last_played_at = '2021-01-19'
+
+      game3 = Game.new(genre3, author3, label3, publish_date, last_played_at)
+      name_game = game3.label.title
+
+      expect(name_game).to eq('Shadow of Chernobyl')
     end
   end
 end
