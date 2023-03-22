@@ -9,6 +9,18 @@ class Book < Item
     @cover_state = 'bad'
   end
 
+  def to_json(*_option)
+    {
+      id: @id,
+      genre_id: @genre.id,
+      author_id: @author.id,
+      label_id: @label.id,
+      publish_date: @publish_date,
+      publisher: @publisher,
+      cover_state: @cover_state
+    }.to_json
+  end
+
   def self.all
     ObjectSpace.each_object(self).to_a
   end
