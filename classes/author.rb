@@ -18,12 +18,12 @@ class Author
   def self.create_author(first_name, last_name)
     first_name = first_name.capitalize
     last_name = last_name.capitalize
-    author = Author.all.find { |aut| aut.first_name == first_name && aut.last_name == last_name }
-    author.nil? ? Author.new(first_name, last_name) : author
+    author = all.find { |aut| aut.first_name == first_name && aut.last_name == last_name }
+    author.nil? ? new(first_name, last_name) : author
   end
 
   def self.by_id(id)
-    Author.all.find { |aut| aut.id == id }
+    all.find { |aut| aut.id == id }
   end
 
   def add_item(item)
