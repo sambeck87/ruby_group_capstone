@@ -20,8 +20,14 @@ OPTIONS = {
 def load_data
   recover_author
   load_genres
+<<<<<<< HEAD
   recover_games
+=======
+  load_labels
+>>>>>>> dev
   load_albums
+  recover_games
+  load_books
 end
 
 def preserve_data
@@ -117,4 +123,26 @@ end
 def save_labels
   File.exist?('data/labels.json') ? File.open('data/labels.json', 'w') : File.new('data/labels.json', 'w')
   File.write('data/labels.json', Label.all.to_json)
+end
+
+def load_books
+  return unless File.exist?('data/books.json') && File.size?('data/books.json')
+
+  data = JSON.parse(File.read('./data/books.json'))
+  data.each do |book|
+    Book.new(
+      Genre.by_id(book['genre_id']),
+      Author.by_id(book['author_id']),
+      Label.by_id(book['label_id']),
+      '2022-01-01',
+      book['publisher']
+    )
+  end
+end
+
+def load_labels
+  return unless File.exist?('data/labels.json') && File.size?('data/labels.json')
+
+  data = JSON.parse(File.read('./data/labels.json'))
+  data.each { |label| Label.new(label['title'], label['color'], label['id']) }
 end
