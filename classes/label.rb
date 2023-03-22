@@ -8,6 +8,15 @@ class Label
     @id = id
   end
 
+  def to_json(*_option)
+    {
+      title: @title,
+      color: @color,
+      items: @items,
+      id: @id
+    }.to_json
+  end
+
   def self.all
     ObjectSpace.each_object(self).to_a
   end
