@@ -26,6 +26,8 @@ end
 def preserve_data
   save_author(Author.all)
   save_game(Game.all)
+  save_genres
+  save_albums
 end
 
 def recover_author
@@ -80,4 +82,14 @@ def load_albums
     author_obj = Author.all.find { |author| author.id == album['author_id'] }
     MusicAlbum.new(genre_obj, author_obj, album['label'], album['publish_date'], on_spotify: album['on_spotify'])
   end
+end
+
+def save_genres
+  File.exist?('data/genres.json') ? File.open('data/genres.json', 'w') : File.new('data/genres.json', 'w')
+  File.write('data/genres.json', Genre.all.to_json)
+end
+
+def save_albums
+  File.exist?('data/albums.json') ? File.open('data/albums.json', 'w') : File.new('data/albums.json', 'w')
+  File.write('data/albums.json', MusicAlbum.all.to_json)
 end
