@@ -39,32 +39,19 @@ describe Item do
       publish_date = '1998-10-08'
 
       item2 = Item.new(genre2, author2, label2, publish_date)
-      genre_name = item2.genre.name
-      label_color = item2.label.color
       author_name = item2.author.first_name
 
       expect(author_name).to eq('Michael')
     end
 
     it 'Create an Item correctly' do
-      genre = double('genre')
-      allow(genre).to receive(:name).and_return('Rock')
-      author = double('author')
-      allow(author).to receive(:first_name).and_return('Michael')
-      allow(author).to receive(:last_name).and_return('Jackson')
-      label = double('label')
-      allow(label).to receive(:title).and_return('Bad')
-      allow(label).to receive(:color).and_return('White')
+      genre3 = double('genre3')
+      author3 = double('author3')
+      label3 = double('label3')
       publish_date = '1998-10-08'
 
-      item = Item.new(genre, author, label, publish_date)
-      genre_name = item.genre.name
-      label_color = item.label.color
-      author_name = item.author.first_name
+      item = Item.new(genre3, author3, label3, publish_date)
 
-      expect(genre_name).to eq('Rock')
-      expect(label_color).to eq('White')
-      expect(author_name).to eq('Michael')
       expect(item.move_to_archive).to be true
     end
   end

@@ -105,9 +105,12 @@ class App
     print 'Publish date (YYYY-MM-DD): '
     user_data_game << gets.chomp.to_s
     print 'Genre: '
-    # genre = Genre.new(gets.chomp.to_s)
-    print 'Label: '
-    # label = Label.new(gets.chomp.to_s)
+    # user_data_game << Genre.create_genre(gets.chomp.to_s)
+    print 'enter title: '
+    title = gets.chomp
+    print 'enter label color: '
+    color = gets.chomp
+    # user_data_game << Label.create_genre(title, color)
     print 'Author First Name: '
     first_name = gets.chomp.to_s
     print 'Author Last Name: '
