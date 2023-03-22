@@ -1,5 +1,5 @@
 class Genre
-  attr_accessor :name, :id
+  attr_accessor :name, :id, :items
 
   def initialize(name, id = SecureRandom.uuid)
     @name = name
