@@ -12,6 +12,10 @@ class Label
     ObjectSpace.each_object(self).to_a
   end
 
+  def self.by_id(id)
+    all.find { |label| label.id == id }
+  end
+
   def add_item(item)
     @items << item
     item.label = self
