@@ -88,11 +88,9 @@ class App
   end
 
   def created_game(data)
-    new_game = Game.new(nil, data[3], nil, data[2], data[1])
+    new_game = Game.new(data[3], data[5], data[4], data[2], data[1])
     new_game.move_to_archive
     new_game.multiplayer = data[0]
-    # save_author(Author.all)
-    # save_game(Game.all)
     puts 'The Game has been created successfully ✅'
   end
 
@@ -105,12 +103,12 @@ class App
     print 'Publish date (YYYY-MM-DD): '
     user_data_game << gets.chomp.to_s
     print 'Genre: '
-    # user_data_game << Genre.create_genre(gets.chomp.to_s)
+    user_data_game << Genre.create_genre(gets.chomp.to_s)
     print 'enter title: '
     title = gets.chomp
     print 'enter label color: '
     color = gets.chomp
-    # user_data_game << Label.create_genre(title, color)
+    user_data_game << Label.create_label(title, color)
     print 'Author First Name: '
     first_name = gets.chomp.to_s
     print 'Author Last Name: '
