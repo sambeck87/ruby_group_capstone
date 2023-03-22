@@ -22,7 +22,6 @@ CREATE TABLE game(
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   multiplayer BOOLEAN,
   last_played_at DATE,
-  publish_date DATE
   item_id INT,
   FOREIGN KEY(item_id) REFERENCES item(id) ON DELETE CASCADE
 );
