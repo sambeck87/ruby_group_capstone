@@ -2,6 +2,7 @@ require 'json'
 require_relative './classes/author'
 require_relative './classes/game'
 require_relative './classes/preserve'
+require_relative './classes/book'
 
 OPTIONS = {
   1 => ['List all books', 'list_books'],
@@ -28,6 +29,7 @@ def preserve_data
   save_game(Game.all)
   save_genres
   save_albums
+  save_books
 end
 
 def recover_author
@@ -104,4 +106,9 @@ def album_from_user_input
   publish_date = gets.chomp
   MusicAlbum.new(genre, author, label, publish_date)
   puts "Album created succesfully.\n\n"
+end
+
+def save_books
+  File.exist?('data/books.json') ? File.open('data/books.json', 'w') : File.new('data/books.json', 'w')
+  File.write('data/books.json', Book.all.to_json)
 end
