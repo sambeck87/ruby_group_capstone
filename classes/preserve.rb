@@ -25,7 +25,6 @@ def save_game(game)
     ]
   end
   games_json = JSON.generate(games)
-  p games_json
   File.exist?('data/games.json') ? File.open('data/games.json', 'w') : File.new('data/games.json', 'w')
   File.write('./data/games.json', games_json)
 end
