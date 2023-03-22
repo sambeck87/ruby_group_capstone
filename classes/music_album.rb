@@ -25,4 +25,14 @@ class MusicAlbum < Item
   def self.all
     ObjectSpace.each_object(self).to_a
   end
+
+  def self.from_hash(album)
+    genre_obj = Genre.by_id(album['genre_id'])
+    author_obj = Author.all.find { |author| author.id == album['author_id'] }
+    self.new(genre_obj, author_obj, album['label'], album['publish_date'], on_spotify: album['on_spotify'])
+  end
+
+  def self.from_hash_array(array)
+    array.each { |album| self.from_hash(album) }
+  end
 end
