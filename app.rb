@@ -47,7 +47,9 @@ class App
   def list_labels; end
 
   def list_authors
-    Author.all.each { |author| puts "\nName: #{author.first_name}, Lastname: #{author.last_name} \n" }
+    puts "\n********************************** AUTHORS **********************************\n"
+    Author.all.each_with_index { |author, index| puts "#{index} - Name: #{author.first_name} #{author.last_name}" }
+    puts "\n\n"
   end
 
   def add_book; end
@@ -63,20 +65,6 @@ class App
     # save_author(Author.all)
     # save_game(Game.all)
     puts 'The Game has been created successfully ✅'
-  end
-
-  def create_author(first_name, last_name, user_data_game)
-    if Author.all.empty?
-      user_data_game << Author.new(first_name, last_name)
-    else
-      author = Author.all.find { |aut| aut.first_name == first_name && aut.last_name == last_name }
-      user_data_game << author unless author.nil?
-      user_data_game << Author.new(first_name, last_name) if author.nil?
-      # Author.all.each do |author|
-      #   found = author.first_name == first_name && author.last_name == last_name
-      #   user_data_game << (found ? author : Author.new(first_name, last_name))
-      # end
-    end
   end
 
   def add_game
@@ -95,7 +83,7 @@ class App
     first_name = gets.chomp.to_s
     print 'Author Last Name: '
     last_name = gets.chomp.to_s
-    create_author(first_name, last_name, user_data_game)
+    user_data_game << Author.create_author(first_name, last_name)
     created_game(user_data_game)
   end
 
