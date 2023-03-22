@@ -1,5 +1,5 @@
 class Label
-  attr_accessor :title, :color
+  attr_accessor :title, :color, :id
 
   def initialize(title, color, id = SecureRandom.uuid)
     @title = title
