@@ -32,6 +32,7 @@ end
 
 def recover_author
   return unless File.exist?('data/authors.json') && File.size?('data/authors.json')
+
   File.write('./data/authors.json', '') unless File.exist?('./data/authors.json')
   author_data = File.read('./data/authors.json')
 
@@ -51,6 +52,7 @@ end
 
 def recover_games
   return unless File.exist?('data/games.json') && File.size?('data/games.json')
+
   File.write('./data/games.json', '') unless File.exist?('./data/games.json')
   games_data = File.read('./data/games.json')
 
@@ -71,6 +73,7 @@ end
 
 def load_genres
   return unless File.exist?('data/genres.json') && File.size?('data/genres.json')
+
   JSON.parse(File.read('data/genres.json')).each { |genre| Genre.new(genre['name'], genre['id']) }
 end
 
