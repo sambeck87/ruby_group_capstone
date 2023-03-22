@@ -19,7 +19,24 @@ class Genre
     }.to_json
   end
 
+  def self.create_genre(name)
+    genre_obj = all.find { |genre| genre.name == name }
+    new(name) if genre_obj.nil?
+  end
+
   def self.all
     ObjectSpace.each_object(self).to_a
+  end
+
+  def self.by_id(id)
+    all.find { |genre| genre.id == id }
+  end
+
+  def self.from_hash(genre)
+    new(genre['name'], genre['id'])
+  end
+
+  def self.from_hash_array(array)
+    array.each { |genre| from_hash(genre) }
   end
 end
