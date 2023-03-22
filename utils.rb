@@ -19,6 +19,8 @@ OPTIONS = {
 def load_data
   recover_author
   recover_games
+  load_genres
+  load_albums
 end
 
 def preserve_data
@@ -62,5 +64,20 @@ def recover_games
       new_game.move_to_archive
       new_game.multiplayer = game[3]
     end
+  end
+end
+
+def load_genres
+  return unless File.exist?('data/genres.json') && File.size?('data/genres.json')
+  JSON.parse(File.read('data/genres.json')).each { |genre| Genre.new(genre['name'], genre['id']) }
+end
+
+def load_albums
+  return unless File.exist?('data/albums.json') && File.size?('data/albums.json')
+
+  JSON.parse(File.read('data/albums.json')).each do |album|
+    genre_obj = Genre.all.find { |genre| genre.id == album['genre_id'] }
+    author_obj = Author.all.find { |author| author.id == album['author_id'] }
+    MusicAlbum.new(genre_obj, author_obj, album['label'], album['publish_date'], on_spotify: album['on_spotify'])
   end
 end
