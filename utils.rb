@@ -94,14 +94,12 @@ def album_from_user_input
   author_firstname = gets.chomp
   print 'Input album author last name: '
   author_lastname = gets.chomp
-  author = Author.all.find { |aut| aut.first_name == author_firstname && aut.last_name == author_lastname }
-  author = Author.new(author_firstname, author_lastname) if author.nil?
+  author = Author.create_author(author_firstname, author_lastname) if author.nil?
   print 'Input album label: '
   label = gets.chomp
   print 'Input album genre: '
   genre_name = gets.chomp
-  genre = Genre.all.find { |gen| gen.name == genre_name }
-  genre = Genre.new(genre_name) if genre.nil?
+  genre = Genre.create_genre(genre_name)
   print 'Input publish date: '
   publish_date = gets.chomp
   MusicAlbum.new(genre, author, label, publish_date)

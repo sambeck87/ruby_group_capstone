@@ -28,7 +28,7 @@ class MusicAlbum < Item
 
   def self.from_hash(album)
     genre_obj = Genre.by_id(album['genre_id'])
-    author_obj = Author.all.find { |author| author.id == album['author_id'] }
+    author_obj = Author.by_id(album['author_id'])
     new(genre_obj, author_obj, album['label'], album['publish_date'], on_spotify: album['on_spotify'])
   end
 
