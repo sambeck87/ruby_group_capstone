@@ -4,6 +4,8 @@ require_relative './classes/game'
 require_relative './classes/preserve'
 require_relative 'classes/genre'
 require_relative 'classes/music_album'
+require_relative './classes/book'
+require_relative './classes/label'
 require_relative './utils'
 
 class App
@@ -12,7 +14,10 @@ class App
     @genres = []
   end
 
-  def list_books; end
+  def list_books
+    puts "There isn't any book \n\n" if Book.all.empty?
+    Book.all.each_with_index { |book, i| puts "#{i}) #{book.label.title}" }
+  end
 
   def list_albums
     list = ''
@@ -44,7 +49,10 @@ class App
     puts Genre.all.length.positive? ? list : "There isn't any genres.\n\n"
   end
 
-  def list_labels; end
+  def list_labels
+    puts "There isn't any label \n\n" if Label.all.empty?
+    Label.all.each_with_index { |label, i| puts "#{i}) #{label.title}" }
+  end
 
   def list_authors
     puts "\n********************************** AUTHORS **********************************\n"
@@ -52,7 +60,28 @@ class App
     puts "\n\n"
   end
 
-  def add_book; end
+  def add_book
+    print 'enter genre: '
+    genre = gets.chomp
+    print 'enter author first name: '
+    author_first_name = gets.chomp
+    print 'enter author last name: '
+    author_last_name = gets.chomp
+    print 'enter title: '
+    title = gets.chomp
+    print 'enter label color: '
+    color = gets.chomp
+    print 'enter publish date: '
+    publish_date = gets.chomp
+    print 'enter publisher: '
+    publisher = gets.chomp
+
+    genre_object = Genre.create_genre(genre)
+    label_object = Label.create_label(title, color)
+    author_object = Author.create_author(author_first_name, author_last_name)
+
+    Book.new(genre_object, author_object, label_object, publish_date, publisher)
+  end
 
   def add_album
     album_from_user_input
