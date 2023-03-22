@@ -27,6 +27,7 @@ def preserve_data
 end
 
 def recover_author
+  return unless File.exist?('data/authors.json') && File.size?('data/authors.json')
   File.write('./data/authors.json', '') unless File.exist?('./data/authors.json')
   author_data = File.read('./data/authors.json')
 
@@ -45,6 +46,7 @@ def recover_objects_by_id(id)
 end
 
 def recover_games
+  return unless File.exist?('data/games.json') && File.size?('data/games.json')
   File.write('./data/games.json', '') unless File.exist?('./data/games.json')
   games_data = File.read('./data/games.json')
 
