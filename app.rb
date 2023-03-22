@@ -23,7 +23,7 @@ class App
     list = ''
     MusicAlbum.all.each_with_index do |album, i|
       list << "\nIndex: #{i} Genre: #{album.genre.name}, Author: #{album.author.first_name} #{album.author.last_name}, "
-      list << "Label: #{album.label} Publish Date: #{album.publish_date}"
+      list << "Label: #{album.label.title} #{album.label.color} Publish Date: #{album.publish_date}"
     end
     list << "\n\n"
     puts MusicAlbum.all.length.positive? ? list : "There isn't any album.\n\n"
