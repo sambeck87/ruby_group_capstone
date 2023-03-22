@@ -46,10 +46,6 @@ def recover_author
   end
 end
 
-def recover_objects_by_id(id)
-  Author.all.find { |aut| aut.id == id }
-end
-
 def recover_games
   return unless File.exist?('data/games.json') && File.size?('data/games.json')
 
@@ -61,9 +57,9 @@ def recover_games
   elsif Game.all.empty?
     games_data = JSON.parse(games_data)
     games_data.each do |game|
-      # genre = recover_objects_by_id(game[0])
-      author = recover_objects_by_id(game[0]) # cambiar al index correcto al implementar todo
-      # label = recover_objects_by_id(game[2])
+      # genre = Genre.by_id(game[0])
+      author = Author.by_id(game[0]) # cambiar al index correcto al implementar todo
+      # label = Label.by_id(game[2])
       new_game = Game.new(nil, author, nil, game[1], game[2]) # cambiar al index correcto al implementar todo
       new_game.move_to_archive
       new_game.multiplayer = game[3]
