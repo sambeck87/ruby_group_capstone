@@ -17,16 +17,16 @@ describe Game do
       last_played_at = '2020-01-19'
 
       app = App.new
-      app.created_game([multiplayer, last_played_at,  publish_date, author0])
+      app.created_game([multiplayer, last_played_at, publish_date, author0])
       publish_date_object = Game.all[0].publish_date.strftime
-      #genre_name = Game.all[0].genre.name
-      #label_title = Game.all[0].label.title
-      #author_name = Game.all[0].author.first_name
+      # genre_name = Game.all[0].genre.name
+      # label_title = Game.all[0].label.title
+      # author_name = Game.all[0].author.first_name
 
       expect(publish_date_object).to eq('2007-03-20')
-      #expect(label_title).to eq('S.T.A.L.K.E.R.: Shadow of Chernobyl')
-      #expect(author_name).to eq('Sergey')
-      #expect(game.move_to_archive).to be true
+      # expect(label_title).to eq('S.T.A.L.K.E.R.: Shadow of Chernobyl')
+      # expect(author_name).to eq('Sergey')
+      # expect(game.move_to_archive).to be true
     end
 
     it 'The name of the author should be Sergey' do
@@ -40,7 +40,7 @@ describe Game do
       last_played_at = '2020-01-19'
 
       app = App.new
-      app.created_game([true, last_played_at,  publish_date, author1])
+      app.created_game([true, last_played_at, publish_date, genre1, label1, author1])
       author_name = Game.all[1].author.first_name
 
       expect(author_name).to eq('Sergey')
@@ -54,7 +54,7 @@ describe Game do
       last_played_at = '2020-01-19'
 
       app = App.new
-      app.created_game([false, last_played_at,  publish_date, author2])
+      app.created_game([true, last_played_at, publish_date, genre2, label2, author2])
       archive = Game.all[2].move_to_archive
 
       expect(archive).to be true

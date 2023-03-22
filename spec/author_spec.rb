@@ -4,7 +4,7 @@ require_relative '../classes/author'
 describe Author do
   context 'When testing Author class' do
     author = Author.new('Sam', 'Rowling')
-    author2= Author.create_author('frank', 'theo')
+    author2 = Author.create_author('frank', 'theo')
     author_required = Author.by_id(author2.id)
 
     name = author.first_name

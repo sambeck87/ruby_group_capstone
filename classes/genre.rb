@@ -21,7 +21,7 @@ class Genre
 
   def self.create_genre(name)
     genre_obj = all.find { |genre| genre.name == name }
-    new(name) if genre_obj.nil?
+    enre_obj.nil? ? new(name) : genre_obj
   end
 
   def self.all
