@@ -49,7 +49,10 @@ class App
     puts Genre.all.length.positive? ? list : "There isn't any genres.\n\n"
   end
 
-  def list_labels; end
+  def list_labels
+    puts "There isn't any label \n\n" if Label.all.empty?
+    Label.all.each_with_index { |label, i| puts "#{i}) #{label.title}" }
+  end
 
   def list_authors
     puts "\n********************************** AUTHORS **********************************\n"
