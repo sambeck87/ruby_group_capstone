@@ -22,9 +22,9 @@ class Author
     author.nil? ? Author.new(first_name.capitalize, last_name.capitalize) : author
   end
 
-def self.by_id(id)
-  Author.all.find { |aut| aut.id == id }
-end
+  def self.by_id(id)
+    Author.all.find { |aut| aut.id == id }
+  end
 
   def add_item(item)
     @items.push(item) unless @items.include?(item)
