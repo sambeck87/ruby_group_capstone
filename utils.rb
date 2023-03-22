@@ -20,11 +20,7 @@ OPTIONS = {
 def load_data
   recover_author
   load_genres
-<<<<<<< HEAD
   recover_games
-=======
-  load_labels
->>>>>>> dev
   load_albums
   recover_games
   load_books
