@@ -19,8 +19,8 @@ OPTIONS = {
 
 def load_data
   recover_author
-  recover_games
   load_genres
+  recover_games  
   load_albums
 end
 
@@ -102,7 +102,7 @@ def album_from_user_input
   label_title = gets.chomp
   print 'Input album label color: '
   label_color = gets.chomp
-  label = Label.create_author(label_title, label_color)
+  label = Label.create_label(label_title, label_color)
   print 'Input album genre: '
   genre_name = gets.chomp
   genre = Genre.create_genre(genre_name)
