@@ -9,6 +9,7 @@ def save_author(author)
     ]
   end
   authors_json = JSON.generate(authors)
+  File.exist?('data/authors.json') ? File.open('data/authors.json', 'w') : File.new('data/authors.json', 'w')
   File.write('./data/authors.json', authors_json)
 end
 
@@ -25,5 +26,6 @@ def save_game(game)
   end
   games_json = JSON.generate(games)
   p games_json
+  File.exist?('data/games.json') ? File.open('data/games.json', 'w') : File.new('data/games.json', 'w')
   File.write('./data/games.json', games_json)
 end
