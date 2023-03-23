@@ -13,6 +13,5 @@ describe MusicAlbum do
 
       expect(album.can_be_archived?).to eq true
     end
-
   end
 end
