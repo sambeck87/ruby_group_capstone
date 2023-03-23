@@ -1,7 +1,6 @@
 require 'json'
 require_relative './classes/author'
 require_relative './classes/game'
-require_relative './classes/preserve'
 require_relative 'classes/genre'
 require_relative 'classes/music_album'
 require_relative './classes/book'
@@ -25,16 +24,16 @@ class App
   end
 
   def list_games
+    puts "\n********************************** GAMES **********************************\n"
     Game.all.each_with_index do |game, index|
-      puts "\n********************************** GAMES **********************************\n"
       puts "
     #{index} - Genre: #{game.genre.name}
-    Author: #{game.author.first_name} #{game.author.last_name}
-    Label title: #{game.label.title}
-    Label color: #{game.label.color}
-    Publish_date: #{game.publish_date}
-    Last_played: #{game.last_played_at}
-    Multiplayer: #{game.multiplayer} "
+        Author: #{game.author.first_name} #{game.author.last_name}
+        Label title: #{game.label.title}
+        Label color: #{game.label.color}
+        Publish_date: #{game.publish_date}
+        Last_played: #{game.last_played_at}
+        Multiplayer: #{game.multiplayer} "
       puts "\n"
     end
   end

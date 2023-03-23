@@ -1,7 +1,6 @@
 require 'json'
 require_relative './classes/author'
 require_relative './classes/game'
-require_relative './classes/preserve'
 require_relative './classes/book'
 
 OPTIONS = {
@@ -71,6 +70,35 @@ def recover_games
       new_game.multiplayer = game[5]
     end
   end
+end
+
+def save_author(author)
+  authors = author.map do |a|
+    [
+      a.first_name,
+      a.last_name,
+      a.id
+    ]
+  end
+  authors_json = JSON.generate(authors)
+  File.exist?('data/authors.json') ? File.open('data/authors.json', 'w') : File.new('data/authors.json', 'w')
+  File.write('./data/authors.json', authors_json)
+end
+
+def save_game(game)
+  games = game.map do |g|
+    [
+      g.genre.id,
+      g.author.id,
+      g.label.id,
+      g.publish_date,
+      g.last_played_at,
+      g.multiplayer
+    ]
+  end
+  games_json = JSON.generate(games)
+  File.exist?('data/games.json') ? File.open('data/games.json', 'w') : File.new('data/games.json', 'w')
+  File.write('./data/games.json', games_json)
 end
 
 def load_genres
