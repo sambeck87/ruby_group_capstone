@@ -30,15 +30,17 @@ class App
   end
 
   def list_games
-    Game.all.each do |game|
+    Game.all.each_with_index do |game, index|
+      puts "\n********************************** GAMES **********************************\n"
       puts "
-      \n
-    Genre: #{game.genre}
+    #{index} - Genre: #{game.genre.name}
     Author: #{game.author.first_name} #{game.author.last_name}
-    Label title: #{game.label}
+    Label title: #{game.label.title}
+    Label color: #{game.label.color}
     Publish_date: #{game.publish_date}
     Last_played: #{game.last_played_at}
-    Multiplayer: #{game.multiplayer} \n"
+    Multiplayer: #{game.multiplayer} "
+      puts "\n"
     end
   end
 
@@ -88,11 +90,9 @@ class App
   end
 
   def created_game(data)
-    new_game = Game.new(nil, data[3], nil, data[2], data[1])
+    new_game = Game.new(data[3], data[5], data[4], data[2], data[1])
     new_game.move_to_archive
     new_game.multiplayer = data[0]
-    # save_author(Author.all)
-    # save_game(Game.all)
     puts 'The Game has been created successfully ✅'
   end
 
@@ -105,9 +105,12 @@ class App
     print 'Publish date (YYYY-MM-DD): '
     user_data_game << gets.chomp.to_s
     print 'Genre: '
-    # genre = Genre.new(gets.chomp.to_s)
-    print 'Label: '
-    # label = Label.new(gets.chomp.to_s)
+    user_data_game << Genre.create_genre(gets.chomp.to_s)
+    print 'enter title: '
+    title = gets.chomp
+    print 'enter label color: '
+    color = gets.chomp
+    user_data_game << Label.create_label(title, color)
     print 'Author First Name: '
     first_name = gets.chomp.to_s
     print 'Author Last Name: '

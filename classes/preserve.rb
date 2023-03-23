@@ -16,16 +16,15 @@ end
 def save_game(game)
   games = game.map do |g|
     [
-      # g.genre.id,
+      g.genre.id,
       g.author.id,
-      # g.label.id,
+      g.label.id,
       g.publish_date,
       g.last_played_at,
       g.multiplayer
     ]
   end
   games_json = JSON.generate(games)
-  p games_json
   File.exist?('data/games.json') ? File.open('data/games.json', 'w') : File.new('data/games.json', 'w')
   File.write('./data/games.json', games_json)
 end
