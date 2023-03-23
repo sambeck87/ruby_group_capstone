@@ -49,14 +49,6 @@ CREATE TABLE book(
   item_id INT PRIMARY KEY,
   publish_date DATE,
   publisher VARCHAR(32),
-<<<<<<< HEAD
-  cover_state VARCHAR(32)
-  FOREIGN KEY (genre_id) REFERENCES genre (id),
-  FOREIGN KEY (author_id) REFERENCES author (id),
-  FOREIGN KEY (label_id) REFERENCES label (id),
-);
-=======
   cover_state VARCHAR(32),
   FOREIGN KEY (item_id) REFERENCES item (id),
 );
->>>>>>> dev
