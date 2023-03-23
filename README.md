@@ -39,7 +39,7 @@
 **Catalog of my things** is a project, where a console app will help you to keep a record of different types of things you own: books, music albums, movies, and games. Everything is based on the UML class diagram presented below. The data is stored in JSON files, and we also prepared a database with tables structure analogical to the program's class structure.
  <br></br>
 
-  <img src="https://raw.githubusercontent.com/microverseinc/curriculum-ruby/main/group-capstone/images/catalog_of_my_things.png?token=GHSAT0AAAAAABZYYK3NRGQIBLE5RT2CAADMZA4Q2MA" alt="logo" width="auto"  height="auto" />
+  <img src="https://raw.githubusercontent.com/microverseinc/curriculum-ruby/main/group-capstone/images/catalog_of_my_things.png?token=GHSAT0AAAAAABZYYK3NRGQIBLE5RT2CAADMZA4Q2MA" alt="diagram" width="auto"  height="auto" />
 
   <br></br>
 
