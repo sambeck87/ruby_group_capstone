@@ -1,10 +1,17 @@
 require 'rspec'
-require_relative '../classes/label'
 require_relative '../classes/book'
+require_relative '../classes/genre'
+require_relative '../classes/author'
+require_relative '../classes/label'
 
 describe Label do
   context 'When testing Label class' do
+    book_genre = Genre.new('Terror')
+    book_author = Author.new('Juan', 'Sanchez')
+    book_label = Label.new('The book', 'red')
+    book = Book.new(book_genre, book_author, book_label, '2021-01-01', 'He')
     label = Label.new('My book', 'red')
+    label.add_item(book)
 
     it 'The title of label should be "My book"' do
       expect(label.title).to eq('My book')
@@ -18,9 +25,7 @@ describe Label do
       expect(label.id.length).to be > 5
     end
 
-    it 'The length of items should be 1 after add_item' do
-      book = Book.new('Terror', 'Me', 'The book', '2000-01-01', 'He')
-      label.add_item(book)
+    it 'The length of items should be 1' do
       expect(label.items.length).to eq 1
     end
 
