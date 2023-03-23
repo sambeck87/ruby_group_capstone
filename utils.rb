@@ -21,6 +21,7 @@ def load_data
   recover_author
   load_genres
   load_labels
+  recover_games
   load_albums
   recover_games
   load_books
@@ -62,12 +63,12 @@ def recover_games
   elsif Game.all.empty?
     games_data = JSON.parse(games_data)
     games_data.each do |game|
-      # genre = Genre.by_id(game[0])
-      author = Author.by_id(game[0]) # cambiar al index correcto al implementar todo
-      # label = Label.by_id(game[2])
-      new_game = Game.new(nil, author, nil, game[1], game[2]) # cambiar al index correcto al implementar todo
+      genre = Genre.by_id(game[0])
+      author = Author.by_id(game[1])
+      label = Label.by_id(game[2])
+      new_game = Game.new(genre, author, label, game[3], game[4])
       new_game.move_to_archive
-      new_game.multiplayer = game[3]
+      new_game.multiplayer = game[5]
     end
   end
 end

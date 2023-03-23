@@ -16,9 +16,9 @@ end
 def save_game(game)
   games = game.map do |g|
     [
-      # g.genre.id,
+      g.genre.id,
       g.author.id,
-      # g.label.id,
+      g.label.id,
       g.publish_date,
       g.last_played_at,
       g.multiplayer
