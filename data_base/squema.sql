@@ -12,6 +12,12 @@ CREATE TABLE author (
   last_name VARCHAR(50)
 );
 
+CREATE TABLE label(
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  title VARCHAR(32),
+  color VARCHAR(20),
+);
+
 CREATE TABLE item (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   source_id INT,
@@ -39,21 +45,18 @@ CREATE TABLE album (
   PRIMARY KEY(item_id)
 );
 
-CREATE TABLE label(
-  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  title VARCHAR(32),
-  color VARCHAR(20),
-);
-
 CREATE TABLE book(
-  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  genre_id INT,
-  author_id INT,
-  label_id INT,
+  item_id INT PRIMARY KEY,
   publish_date DATE,
   publisher VARCHAR(32),
+<<<<<<< HEAD
   cover_state VARCHAR(32)
   FOREIGN KEY (genre_id) REFERENCES genre (id),
   FOREIGN KEY (author_id) REFERENCES author (id),
   FOREIGN KEY (label_id) REFERENCES label (id),
 );
+=======
+  cover_state VARCHAR(32),
+  FOREIGN KEY (item_id) REFERENCES item (id),
+);
+>>>>>>> dev
