@@ -36,15 +36,13 @@
 #  Catalog of my things <a name="about-project"></a>
 
 
-**Catalog of my things** is a project, where a console app will help you to keep a record of different types of things you own: books, music albums, movies, and games. Everything is based on the UML class diagram presented below. The data is stored in JSON files, and we also prepared a database with tables structure analogical to the program's class structure.
+**Catalog of my things** is a project, where a console app helps you to keep a record of different types of things you own: books, music albums, movies, and games. Everything is based on the UML class diagram presented below. The data is stored in JSON files, and we also prepared a database with tables structure analogical to the program's class structure.
  <br></br>
 
-  <img src="https://raw.githubusercontent.com/microverseinc/curriculum-ruby/main/group-capstone/images/catalog_of_my_things.png?token=GHSAT0AAAAAABZYYK3NRGQIBLE5RT2CAADMZA4Q2MA" alt="diagram" width="auto"  height="auto" />
-
+**[Diagram](https://github.com/microverseinc/curriculum-ruby/raw/main/group-capstone/images/catalog_of_my_things.png)**
   <br></br>
 
 This project allows you:
-
 
 - List all books
 - List all music albums
@@ -56,6 +54,8 @@ This project allows you:
 - Add a music album
 - Add a game
 
+**You can see a brief video about the project [here](https://drive.google.com/file/d/1T20scd86-bSlOD64HvDcOKj5HtTZkT-S/view?usp=sharing )**
+<br>
 
 ## 🛠 Built With <a name="built-with"></a>
 - Ruby
