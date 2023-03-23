@@ -27,11 +27,10 @@ CREATE TABLE item (
 );
 
 CREATE TABLE game(
-  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  item_id INT REFERENCES item(id),
   multiplayer BOOLEAN,
   last_played_at DATE,
-  item_id INT,
-  FOREIGN KEY(item_id) REFERENCES item(id) ON DELETE CASCADE
+  PRIMARY KEY(item_id)
 );
 
 CREATE TABLE album (
