@@ -9,11 +9,6 @@ require_relative './classes/label'
 require_relative './utils'
 
 class App
-  def initialize
-    @music_albums = []
-    @genres = []
-  end
-
   def list_books
     puts "There isn't any book \n\n" if Book.all.empty?
     Book.all.each_with_index { |book, i| puts "#{i}) #{book.label.title}" }
