@@ -13,6 +13,16 @@ def get_option_selected(from, to)
 end
 
 def main
+  puts "
+                                  -=x=-=x=-=x=-=x=-=x=-=x=-=
+                                  ╔╦═╦╗┌┐┌┐──┌┌─┐┐───────┐░░
+                                  ║║║║╠═╦╗╔═╦═╦══╦═╗░░░░░│░░
+                                  ║║║║║╩╣╚╣═╣╬║║║║╩╣░░░░░│░░
+                                  ╚═╩═╩═╩═╩═╩═╩╩╩╩═╝░░░░░│░░
+                                  ░░░░░░░░└──────────────┘░░
+                                  -=x=-=x=-=x=-=x=-=x=-=x=-=
+
+"
   app = App.new
   app.run
   puts 'Thanks for using this app!'
