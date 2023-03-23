@@ -9,14 +9,32 @@ require_relative './utils'
 
 class App
   def list_books
+    puts "\n********************************** BOOKS **********************************\n"
+    puts '
+                                      _ _
+                                 .-. | | |
+                                 |M|_|A|N|
+                                 |A|a|.|.|<\
+                                 |T|r| | | \\
+                                 |H|t|M|Z|  \\
+                                 | |!| | |   \>
+                                """"""""""""""""""'
+
     puts "There isn't any book \n\n" if Book.all.empty?
-    Book.all.each_with_index { |book, i| puts "#{i}) #{book.label.title}" }
+    Book.all.each_with_index { |book, i| puts "#{i} - #{book.label.title}" }
+    puts "\n"
   end
 
   def list_albums
+    puts "\n********************************** ALBUMS **********************************\n"
+    puts "
+                                    ╔═══╗ ♪
+                                    ║███║ ♫
+                                    ║ (●) ♫
+                                    ╚═══╝♪♪ \n"
     list = ''
     MusicAlbum.all.each_with_index do |album, i|
-      list << "\nIndex: #{i} Genre: #{album.genre.name}, Author: #{album.author.first_name} #{album.author.last_name}, "
+      list << "\n#{i} - Genre: #{album.genre.name}, Author: #{album.author.first_name} #{album.author.last_name}, "
       list << "Label: #{album.label.title} #{album.label.color} Publish Date: #{album.publish_date}"
     end
     list << "\n\n"
@@ -25,33 +43,61 @@ class App
 
   def list_games
     puts "\n********************************** GAMES **********************************\n"
+    puts "
+                          ─▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄
+                          █░░░█░░░░░░░░░░▄▄░██░█
+                          █░▀▀█▀▀░▄▀░▄▀░░▀▀░▄▄░█
+                          █░░░▀░░░▄▄▄▄▄░░██░▀▀░█
+                          ─▀▄▄▄▄▄▀─────▀▄▄▄▄▄▄▀
+\n"
     Game.all.each_with_index do |game, index|
       puts "
-    #{index} - Genre: #{game.genre.name}
-        Author: #{game.author.first_name} #{game.author.last_name}
-        Label title: #{game.label.title}
-        Label color: #{game.label.color}
-        Publish_date: #{game.publish_date}
-        Last_played: #{game.last_played_at}
-        Multiplayer: #{game.multiplayer} "
+#{index} - Genre: #{game.genre.name}
+    Author: #{game.author.first_name} #{game.author.last_name}
+    Label title: #{game.label.title}
+    Label color: #{game.label.color}
+    Publish_date: #{game.publish_date}
+    Last_played: #{game.last_played_at}
+    Multiplayer: #{game.multiplayer} "
       puts "\n"
     end
   end
 
   def list_genres
+    puts "
+                              ┌──┐░┌┐┌┐──┌┌─┐┐───────┐░░
+                              │┌─┼─┬─┬┬┬┬─┤─┤┤░░░░░░░│░░
+                              │└┐│┴┤│││┌┤┴┼─││░░░░░░░│░░
+                              └──┴─┴┴─┴┘└─┴─┘┘░░░░░░░│░░
+                              ░░░░░░░░└──────────────┘░░
+    "
     list = ''
-    Genre.all.each_with_index { |genre, i| list << "\nIndex: #{i} Name: #{genre.name}" }
+    Genre.all.each_with_index { |genre, i| list << "\n#{i} - Name: #{genre.name}" }
     list << "\n\n"
     puts Genre.all.length.positive? ? list : "There isn't any genres.\n\n"
   end
 
   def list_labels
+    puts "
+                              ░░░░░┌┐░┌──┌─┐─────────┐░░
+                              ┌┐┌─┐│└┬─┬┐│─┤░░░░░░░░░│░░
+                              │└┤┼└┤┼│┴┤└┼─│░░░░░░░░░│░░
+                              └─┴──┴─┴─┴─┴─┘░░░░░░░░░│░░
+                              ░░░░░░░░└──────────────┘░░
+    "
     puts "There isn't any label \n\n" if Label.all.empty?
-    Label.all.each_with_index { |label, i| puts "#{i}) #{label.title}" }
+    Label.all.each_with_index { |label, i| puts "#{i} - #{label.title}" }
+    puts "\n"
   end
 
   def list_authors
-    puts "\n********************************** AUTHORS **********************************\n"
+    puts "
+                              ┌──┐░┌┐┌┐──┌─┌─┐───────┐░░
+                              │┌┐├┬┤└┤└┬─┬┬┤─┤░░░░░░░│░░
+                              │├┤│││┌┤││┼│┌┼─│░░░░░░░│░░
+                              └┘└┴─┴─┴┴┴─┴┘└─┘░░░░░░░│░░
+                              ░░░░░░░░└──────────────┘░░
+    "
     Author.all.each_with_index { |author, index| puts "#{index} - Name: #{author.first_name} #{author.last_name}" }
     puts "\n\n"
   end
