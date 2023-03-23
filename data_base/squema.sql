@@ -12,6 +12,12 @@ CREATE TABLE author (
   last_name VARCHAR(50)
 );
 
+CREATE TABLE label(
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  title VARCHAR(32),
+  color VARCHAR(20),
+);
+
 CREATE TABLE item (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   source_id INT,
@@ -38,12 +44,6 @@ CREATE TABLE album (
   item_id  INT REFERENCES item(id),
   on_spotify  BOOLEAN,
   PRIMARY KEY(item_id)
-);
-
-CREATE TABLE label(
-  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  title VARCHAR(32),
-  color VARCHAR(20),
 );
 
 CREATE TABLE book(
